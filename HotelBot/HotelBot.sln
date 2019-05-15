@@ -1,0 +1,27 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.489
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "HotelBot", "HotelBot.pyproj", "{3FD05B89-BA98-41C7-9698-9FE802D22085}"
+EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "AirTicketsBot", "..\AirTicketsBot\AirTicketsBot.pyproj", "{A6325D06-95B5-48B6-B28D-03293CCFDA40}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3FD05B89-BA98-41C7-9698-9FE802D22085}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3FD05B89-BA98-41C7-9698-9FE802D22085}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A6325D06-95B5-48B6-B28D-03293CCFDA40}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A6325D06-95B5-48B6-B28D-03293CCFDA40}.Release|Any CPU.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {11F137D4-CC05-4230-A5C4-FC41B816D914}
+	EndGlobalSection
+EndGlobal
