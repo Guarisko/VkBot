@@ -1,7 +1,9 @@
 import logging;
 import logging.handlers as handlers;
 
-logger = logging.getLogger('vistaExchange');
+#Конфигурация логов, будут писаться каждый день новый файл, ошибки в отдельные файлы
+
+logger = logging.getLogger('airTicketsBot');
 logger.setLevel(logging.INFO);
 
 formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s');
