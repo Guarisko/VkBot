@@ -1,4 +1,5 @@
 from Database.DbHandle import DbHandle
+from Database.Repositories.UserRepository import UserRepository
 from Logger import getLogger;
 import json;
 
@@ -29,10 +30,8 @@ class UserVariables:
         return self.variables.get(variable);
 
     def save(self):
-        handle = DbHandle.get();
         vars = json.dumps(self.variables);
         UserRepository.updateVariables(self.userId, vars);
-        handle.close();
 
     def load(self):
         handle = DbHandle.get();
@@ -42,4 +41,5 @@ class UserVariables:
                self.variables = json.loads(foundUser.variables);
         except Exception as e:
             self.variables = {};
-        handle.close();
+        finally:
+            handle.close();

@@ -1,9 +1,8 @@
 import json;
 
 class AirTicket:
-     def __init__(self, jsonObject):
-         obj = json.loads(jsondata);
-         isActual = obj.get('actual');
+     def __init__(self, obj):
+         self.isActual = obj.get('actual');
          self.departDate = obj.get('depart_date');
          self.returnDate = obj.get('return_date');
          self.gate = obj.get('gate');
@@ -15,22 +14,30 @@ class AirTicket:
 
      def getText(self):
          text = 'Авиабилет: '
-         text += 'Дата вылета: ' + str(self.departDate) + '\r\n';
-         text += 'Дата прилета: ' + str(self.returnDate) + '\r\n';
-         text += 'Источник: ' + str(self.gate) + '\r\n';
-         text += 'Дистанция: ' + str(self.distance) + 'км\r\n';
+         text += 'Дата вылета: ' + AirTicket.toStr(self.departDate) + '\r\n';
+         text += 'Дата прилета: ' + AirTicket.toStr(self.returnDate) + '\r\n';
+         text += 'Источник: ' + AirTicket.toStr(self.gate) + '\r\n';
+         text += 'Дистанция: ' + AirTicket.toStr(self.distance) + 'км\r\n';
 
-         hours = self.duration / 60;
-         minutes = self.duration - hours * 60;
-         text += 'Время полета: ' + str(self.hours) + 'часов ' + str(minutes) +'минут\r\n';
+         if self.duration is not None:
+             hours = self.duration / 60;
+             minutes = self.duration - hours * 60;
+             text += 'Время полета: ' + AirTicket.toStr(hours) + 'часов ' + AirTicket.toStr(minutes) +'минут\r\n';
 
-         text += 'Количество трансферов: ' + str(self.transfers) + '\r\n';
-         if tripClass == 0:
-            text += 'Эконом класс\r\n';
-         if tripClass == 1:
-            text += 'Бизнес класс\r\n';
-         if tripClass == 2:
-            text += 'Первый класс\r\n';
-         text += '💰Цена: ' + str(self.price) + '\r\n';
+         text += 'Количество трансферов: ' + AirTicket.toStr(self.transfers) + '\r\n';
+         if self.tripClass is not None:
+             if self.tripClass == 0:
+                text += 'Эконом класс\r\n';
+             if self.tripClass == 1:
+                text += 'Бизнес класс\r\n';
+             if self.tripClass == 2:
+                text += 'Первый класс\r\n';
+         text += '💰Цена: ' + AirTicket.toStr(self.price) + '\r\n';
          return text;
+
+     @staticmethod
+     def toStr(value):
+         if value is None:
+            return '-';
+         return str(value);
 

@@ -1,4 +1,5 @@
 from Database.Repositories.UserRepository import UserRepository
+from Logger import getLogger;
 from Database.Entities.DbUserSearchRequest import DbUserSearchRequest;
 from Database.DbHandle import DbHandle;
 from Database.Entities.BaseDbModel import BaseDbModel;

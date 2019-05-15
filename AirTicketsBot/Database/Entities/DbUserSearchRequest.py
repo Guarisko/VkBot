@@ -1,6 +1,7 @@
 from Database.Entities.DbUser import DbUser;
 from Database.Entities.BaseDbModel import BaseDbModel;
 from peewee import *;
+import datetime;
 
 #cущность запроса на поиск авиабилетов для конкретного пользователя
 class DbUserSearchRequest(BaseDbModel):
@@ -10,6 +11,7 @@ class DbUserSearchRequest(BaseDbModel):
     toCountry = CharField(max_length=100);
     startDate = CharField(max_length=100);
     endDate = CharField(max_length=100);
+    createdMsk = DateTimeField(default=datetime.datetime.now);
     user = ForeignKeyField(DbUser, related_name='fk_user_search_request_user_id', to_field='id');
 
     class Meta:

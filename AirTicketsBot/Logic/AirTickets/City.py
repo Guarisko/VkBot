@@ -7,7 +7,6 @@ class City:
 
      @staticmethod
      def fromJson(jsonObj):
-         obj = json.loads(jsonObj);
-         return City(obj.get('code'), obj.get('name'));
+         return City(jsonObj.get('code'), jsonObj.get('name'));
 
 

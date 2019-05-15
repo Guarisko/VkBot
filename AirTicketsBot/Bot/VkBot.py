@@ -2,6 +2,7 @@
 - Класс для прослушивания сообщений ВкБота через LongPolling Api
 '''
 from Logic.BotEventHandler import BotEventHandler
+from Bot.VkBotKeyboard import VkBotKeyboard
 from Bot.VkBotSession import VkBotSession
 from Bot.BotEvent import BotEvent
 
@@ -30,7 +31,20 @@ class VkBot:
                     botEvent = BotEvent(event.user_id, text, payload);
                     botSession.fromUserId(botEvent.userId);
                     botSession.getUser();
-                    eventHandler.handle(botEvent);
+                    try:
+                        eventHandler.handle(botEvent);
+                    except Exception as e:
+                        #сообщение об ошибке пользователю
+                        eventHandler.logger.fatal(e, exc_info=True);
+                        eventHandler.botSession.sendMsgUser('Произошла неизвестная ошибка.\r\nАдминистратор уже уведомлен.\r\nПеремещаю в основное меню', botEvent.userId);
+
+                        #сообщение об ошибке администратору
+                        user = eventHandler.botSession.getUser();
+                        self.sendErrorToAdmin('Произошла неизвестная ошибка:' + str(e) + '\r\n пользователь: ' + str(user.vkUrl));
+
+                        #перемещение в основное меню
+                        mainScreen = eventHandler.screensRepository.mainScreen(eventHandler.botSession, VkBotKeyboard(), event);
+                        mainScreen.start();
 
     #отправляет сообщение об ошибке администратору
     @staticmethod

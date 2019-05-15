@@ -11,7 +11,7 @@ def mainScreen(session: VkBotSession, keyBoard: VkBotKeyboard, event: BotEvent):
     userVars = UserVariables(event.userId);
     userVars.clear();
    
-    keyBoard.addButton(KeyBoardButton('Найти авиабилет', Payload(Command.SearchTickets)));
+    keyBoard.addButton(KeyBoardButton('Найти авиабилет', Payload(Command.SearchTicketsFromDate)));
     keyBoard.addNewLine();
 
     keyBoard.addButton(KeyBoardButton('Мои запросы на поиск', Payload(Command.UserRequests)));
@@ -19,10 +19,9 @@ def mainScreen(session: VkBotSession, keyBoard: VkBotKeyboard, event: BotEvent):
 
     keyBoard.addButton(KeyBoardButton('Поддержка', Payload(Command.Support)));
     keyBoard.addButton(KeyBoardButton('Как пользоваться ботом', Payload(Command.BotRules)));
-    keyBoard.addNewLine();
 
     user = session.getUser();
-    screen = Screen( user.name + ' , вас приветствует бот по поиску авиабилетов.\r\nВыберите подходящий пункт меню ниже.\r\nЕсли вы не видите пункты меню нажмите на квадратик рядом с полем ввода', session, keyBoard);
+    screen = Screen( user.name + ', вас приветствует бот по поиску ДЕШЕВЫХ авиабилетов.\r\nВыберите подходящий пункт меню ниже.', session, keyBoard);
     return screen;
 
 def supportScreen(session: VkBotSession, keyBoard: VkBotKeyboard, event: BotEvent):

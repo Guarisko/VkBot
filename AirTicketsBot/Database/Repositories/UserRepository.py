@@ -1,3 +1,4 @@
+from Logger import getLogger;
 from Database.Entities.DbUser import DbUser;
 from Database.DbHandle import DbHandle;
 from Database.Entities.BaseDbModel import BaseDbModel;
@@ -33,3 +34,14 @@ class UserRepository:
             getLogger().fatal(e, exc_info=True);
         finally:
             handle.close();
+
+     @staticmethod 
+     def updateVariables(userId, variables):
+        handle = DbHandle.get();
+        try:
+          u = DbUser.update(variables=variables).where(DbUser.vkUserId == userId);
+          u.execute();
+        except Exception as e:
+          getLogger().fatal(e, exc_info=True);
+        finally:
+          handle.close();

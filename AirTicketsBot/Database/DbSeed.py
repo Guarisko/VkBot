@@ -1,4 +1,5 @@
 #coding=utf-8
+from Database.DbHandle import DbHandle;
 from Database.Entities.DbUserSearchRequest import DbUserSearchRequest;
 from Database.Entities.DbUser import DbUser;
 

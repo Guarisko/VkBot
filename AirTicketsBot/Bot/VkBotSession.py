@@ -1,11 +1,12 @@
 from Database.Entities.DbUser import DbUser
+from Bot.VkBotKeyboard import VkBotKeyboard;
 from Database.Repositories.UserRepository import UserRepository
 from vk_api.utils import get_random_id;
 import vk_api;
 from Logger import getLogger;
 
 #Сессия для работы с ботов, предоставляет возможность отправлять сообщения с кнопками и без
-class VkBotSession(BotSession):
+class VkBotSession:
       def __init__(self, baseSession: vk_api.VkApi):
          self.session = baseSession;
          self.logger = getLogger();
@@ -14,7 +15,7 @@ class VkBotSession(BotSession):
       def fromUserId(self, userId: int) -> None:
          self.userId = userId;
 
-      def sendMsgKeyBoard(self, message: str, keyBoard: KeyBoard) -> None: 
+      def sendMsgKeyBoard(self, message: str, keyBoard: VkBotKeyboard) -> None: 
          keyb = keyBoard.build();
          self.session.method('messages.send', {'user_id': self.userId, 'message': message, "random_id":get_random_id(), "keyboard": keyb});
 
@@ -24,7 +25,7 @@ class VkBotSession(BotSession):
       def sendMsgUser(self, message: str, userId: int) -> None: 
         self.session.method('messages.send', {'user_id': userId, 'message': message, "random_id":get_random_id()});
 
-      def sendMsgKeyBoardUser(self, message: str, userId: int, keyBoard: KeyBoard) -> None: 
+      def sendMsgKeyBoardUser(self, message: str, userId: int, keyBoard: VkBotKeyboard) -> None: 
          keyb = keyBoard.build();
          self.session.method('messages.send', {'user_id': userId, 'message': message, "random_id":get_random_id(), "keyboard": keyb});
 
@@ -41,7 +42,7 @@ class VkBotSession(BotSession):
             domain = 'https://vk.com/'+response['domain'];
 
             name = firstName + ' ' + lastName;
-            UserRepository.save(self.userId, name, domain);
+            UserRepository.updateOrCreate(self.userId, name, domain);
 
             self.user = DbUser(name=name, vkUrl= domain, vkUserId= self.userId);
             return self.user;

@@ -1,3 +1,4 @@
+from Logger import getLogger
 from Logic.AirTickets.AirTicket import AirTicket;
 from Logic.AirTickets.City import City;
 import requests;
@@ -9,7 +10,7 @@ class AirTicketClient:
         self.baseUrl = 'https://api.travelpayouts.com';
 
         #cache cities for future requests
-        cities = getJsonFromUrl('/data/cities.json');
+        cities = self.getJsonFromUrl('/data/cities.json', {});
         self.cities = [];
         for city in cities:
             self.cities.append(City.fromJson(city));
@@ -18,7 +19,10 @@ class AirTicketClient:
         return [t for t in self.cities if t.code == code];
 
     def getTickets(self, arrivalDate, departureDate, fromCity, toCity, currency):
-        result = [];
+        result = {
+            'tickets': [],
+            'error': ''
+        };
         parameters = {
             'currency': currency,
             'depart_date': arrivalDate,
@@ -27,9 +31,22 @@ class AirTicketClient:
             'destination': toCity,
             'show_to_affiliates': 'true'
         };
-        jsonTickets = getJsonFromUrl('/v2/prices/nearest-places-matrix', parameters);
-        for ticket in jsonTicket:
-            result.append(AirTicket(ticket));
+        try:
+            jsonTickets = self.getJsonFromUrl('/v2/prices/nearest-places-matrix', parameters);
+            data = jsonTickets.get('data');
+            try:
+                errors = data.get('errors');
+                if errors is not None:
+                   data = jsonTickets.get('data').get('prices');
+            except Exception as e:
+                data = jsonTickets.get('data').get('prices');
+
+            for ticket in data:
+                result['tickets'].append(AirTicket(ticket));
+        except Exception as e:
+            getLogger().fatal(e, exc_info=True);
+            result['error'] = 'Вовремя поиска билетов произошла ошибка.\r\nСкорее всего вы указали неверные данные.\r\nВернитесь в меню и попробуйте снова.\r\n'
+            raise;
         return result;
 
     def getJsonFromUrl(self, url, parameters):
@@ -38,7 +55,7 @@ class AirTicketClient:
             'Content-Type': 'application/json;charset=utf-8',
             'X-Access-Token': self.authToken
         };
-        r = requests.get(self.baseUrl + url, parameters=parameters, headers = headers);
+        r = requests.get(self.baseUrl + url, params=parameters, headers = headers);
         return r.json();
 
 

@@ -46,6 +46,7 @@
     <Compile Include="Database\__init__.py" />
     <Compile Include="Infrastructure\UserVariables.py" />
     <Compile Include="Infrastructure\__init__.py" />
+    <Compile Include="Cache.py" />
     <Compile Include="Logger.py" />
     <Compile Include="Logic\AirTickets\AirTicketClient.py">
       <SubType>Code</SubType>
@@ -54,8 +55,13 @@
     <Compile Include="Logic\AirTickets\City.py" />
     <Compile Include="Logic\AirTickets\__init__.py" />
     <Compile Include="Logic\BotEventHandler.py" />
+    <Compile Include="Logic\Variables.py" />
     <Compile Include="Logic\Command.py" />
     <Compile Include="Logic\ScreenRepository.py" />
+    <Compile Include="Logic\Screens\InputScreen.py" />
+    <Compile Include="Logic\Screens\SearchTicketsScreen.py" />
+    <Compile Include="Logic\Screens\MyRequestsScreen.py" />
+    <Compile Include="Logic\Screens\MainScreen.py" />
     <Compile Include="Logic\Screens\__init__.py" />
     <Compile Include="Logic\__init__.py" />
     <Compile Include="Main.py" />
