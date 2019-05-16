@@ -1,7 +1,9 @@
-from Logger import getLogger
+from Cache import getCache;
+from Logger import getLogger;
 from Logic.AirTickets.AirTicket import AirTicket;
 from Logic.AirTickets.City import City;
 import requests;
+import json;
 
 #клиент для получения информации по авиабилетам работает через http api.travelpayouts
 class AirTicketClient:
@@ -9,14 +11,25 @@ class AirTicketClient:
         self.authToken = '7fd19706724df624fe13188104bcd310';
         self.baseUrl = 'https://api.travelpayouts.com';
 
-        #cache cities for future requests
-        cities = self.getJsonFromUrl('/data/cities.json', {});
-        self.cities = [];
-        for city in cities:
-            self.cities.append(City.fromJson(city));
+    @staticmethod
+    def initCities():
+        cities = [];
+        with open('cities.json', encoding="utf8") as json_file:  
+            data = json.load(json_file).get('data');
+            for city in data:
+                cities.append(City.fromJson(city));
+        getCache().set('cities', cities);
+           
 
-    def getCityByCode(self, code):
-        return [t for t in self.cities if t.code == code];
+    @staticmethod
+    def getCityByName(name):
+        cities = getCache().get('cities');
+        return [t for t in cities if name.lower() in t.name.lower()];
+
+    @staticmethod
+    def getCityByCode(code):
+        cities = getCache().get('cities');
+        return [t for t in cities if code in t.code];
 
     def getTickets(self, arrivalDate, departureDate, fromCity, toCity, currency):
         result = {

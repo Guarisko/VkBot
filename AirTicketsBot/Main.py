@@ -1,3 +1,4 @@
+from Logic.AirTickets.AirTicketClient import AirTicketClient;
 from Bot.VkBot import VkBot;
 
 # -*- coding: utf-8 -*-
@@ -16,6 +17,7 @@ def start():
     while True:
         try:
             DbSeed.init();
+            AirTicketClient.initCities();
             logger.info('AirTickets bot started');
             vkBot.runListen();
             logger.info('AirTickets bot finished');

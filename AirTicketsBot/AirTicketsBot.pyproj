@@ -58,7 +58,6 @@
     <Compile Include="Logic\Variables.py" />
     <Compile Include="Logic\Command.py" />
     <Compile Include="Logic\ScreenRepository.py" />
-    <Compile Include="Logic\Screens\InputScreen.py" />
     <Compile Include="Logic\Screens\SearchTicketsScreen.py" />
     <Compile Include="Logic\Screens\MyRequestsScreen.py" />
     <Compile Include="Logic\Screens\MainScreen.py" />
@@ -75,6 +74,9 @@
     <Folder Include="Infrastructure\" />
     <Folder Include="Logic\AirTickets\" />
     <Folder Include="Logic\Screens\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="cities.json" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in

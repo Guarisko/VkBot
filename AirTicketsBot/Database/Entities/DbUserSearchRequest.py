@@ -7,8 +7,8 @@ import datetime;
 class DbUserSearchRequest(BaseDbModel):
     id = PrimaryKeyField(null=False);
     currency = CharField(max_length=100);
-    fromCountry = CharField(max_length=100);
-    toCountry = CharField(max_length=100);
+    fromCity = CharField(max_length=100);
+    toCity = CharField(max_length=100);
     startDate = CharField(max_length=100);
     endDate = CharField(max_length=100);
     createdMsk = DateTimeField(default=datetime.datetime.now);

@@ -1,8 +1,7 @@
-from Bot.VkBotKeyboard import VkBotKeyboard
-from Logic.Variables import Variables
-from Logic.Screens.InputScreen import InputScreen;
-from Logic.Screens.MyRequestsScreen import myRequests
-from Logic.Screens.SearchTicketsScreen import searchTickets, selectCurrencyScreen, showTicketInfo;
+from Bot.VkBotKeyboard import VkBotKeyboard;
+from Logic.Variables import Variables;
+from Logic.Screens.MyRequestsScreen import myRequests, userTicketRequestScreen;
+from Logic.Screens.SearchTicketsScreen import searchTickets, selectCurrencyScreen, showTicketInfo, searchTicketsFromDate, searchTicketsToDate, searchTicketsFromDate, searchTicketsFromCity, searchTicketsToCity, searchTicketsFromCitySelect, searchTicketsToCitySelect;
 from Logic.Command import Command
 from Logic.Screens.MainScreen import mainScreen, backMenu, botRules, supportScreen;
 from Bot.BotEvent import BotEvent;
@@ -60,18 +59,18 @@ class ScreenRepository:
         self.screens[Command.BotRules] = botRules;
         self.screens[Command.TicketInfo] = showTicketInfo;
 
+        self.screens[Command.SearchTicketsFromDate] = searchTicketsFromDate;
+        self.screens[Command.SearchTicketsToDate] = searchTicketsToDate;
 
-        currency = selectCurrencyScreen;
-        toCity = InputScreen(Command.SearchTicketsToCity, 'В какой город вы поедете?','Введите корректный город', '(.*)', Variables.TicketFromCity, Command.SearchTicketsFromCurrency, currency).inputScreen;
-        fromCity = InputScreen(Command.SearchTicketsFromCity, 'Из какого города вы поедете?','Введите корректный город', '(.*)', Variables.TicketToCity, Command.SearchTicketsToCity, toCity).inputScreen;
-        toDate = InputScreen(Command.SearchTicketsToDate, 'Введите дату окончания поездки (2019-02-01)','Дата должна быть в формате 2019-02-01', '\d{4}\-\d{2}\-\d{2}', Variables.TicketToDate, Command.SearchTicketsFromCity, fromCity).inputScreen;
-        fromDate = InputScreen(Command.SearchTicketsFromDate, 'Введите дату начала поездки (2019-02-01)','Дата должна быть в формате 2019-02-01', '\d{4}\-\d{2}\-\d{2}', Variables.TicketFromDate, Command.SearchTicketsToDate, toDate).inputScreen;
-
-        self.screens[Command.SearchTicketsFromDate] = fromDate;
-        self.screens[Command.SearchTicketsToDate] = toDate;
-        self.screens[Command.SearchTicketsFromCity] = fromCity;
-        self.screens[Command.SearchTicketsToCity] = toCity;
-        self.screens[Command.SearchTicketsFromCurrency] = currency;
+        self.screens[Command.SearchTicketsFromCity] = searchTicketsFromCity;
+        self.screens[Command.SearchTicketsFromCitySelect] = searchTicketsFromCitySelect;
+        
+        self.screens[Command.SearchTicketsToCity] = searchTicketsToCity;
+        self.screens[Command.SearchTicketsToCitySelect] = searchTicketsToCitySelect;
+        
+        self.screens[Command.SearchTicketsFromCurrency] = selectCurrencyScreen;
 
         self.screens[Command.SearchTickets] = searchTickets;
         self.screens[Command.UserRequests] = myRequests;
+        self.screens[Command.UserTicketRequest] = userTicketRequestScreen;
+        

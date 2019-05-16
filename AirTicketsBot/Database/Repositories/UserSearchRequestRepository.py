@@ -26,7 +26,11 @@ class UserSearchRequestRepository:
         result = [];
         try:
             user = UserRepository.getById(id);
-            result = DbUserSearchRequest.select().where(DbUserSearchRequest.user == user.id).get();
+            result = (DbUserSearchRequest.select()
+                      .where(DbUserSearchRequest.user == user.id)
+                      .limit(8)
+                      .order_by(DbUserSearchRequest.createdMsk.desc())
+                     );
         except Exception as e:
             getLogger().fatal(e, exc_info=True);
             result = [];
@@ -34,11 +38,12 @@ class UserSearchRequestRepository:
             handle.close();
         return result;
 
-     @staticmethod 
-     def create(currency, fromCountry, toCountry, startDate, endDate, userId):
+     @staticmethod
+     def create(currency, fromCity, toCity, startDate, endDate, userId):
         handle = DbHandle.get();
         try:
-            request = DbUserSearchRequest(currency=currency, fromCountry=fromCountry, user = userId, toCountry=toCountry,startDate=startDate, endDate=endDate);
+            user = UserRepository.getById(userId);
+            request = DbUserSearchRequest(currency=currency, fromCity=fromCity, user=user.id, toCity=toCity,startDate=startDate, endDate=endDate);
             request.save();
         except Exception as e:
             getLogger().fatal(e, exc_info=True);
