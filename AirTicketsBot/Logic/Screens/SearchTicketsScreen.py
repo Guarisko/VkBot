@@ -50,6 +50,7 @@ def searchTickets(session: VkBotSession, keyBoard: VkBotKeyboard, event: BotEven
                textBtn = '💵 ' + str(ticket.price) + ' ' + str(ticket.gate);
                dict = {};
                dict['idx'] = idx;
+               dict['currency'] = currency;
                keyBoard.addButton(KeyBoardButton(textBtn, Payload(Command.TicketInfo, dict)));
                keyBoard.addNewLine();
                idx+=1;
@@ -62,9 +63,9 @@ def showTicketInfo(session: VkBotSession, keyBoard: VkBotKeyboard, event: BotEve
     keyBoard.addButton(KeyBoardButton('Назад в меню', Payload(Command.BackMenu)));
     tickets = getCache().get(event.userId);
     idx = event.payload.dict['idx'];
+    currency = event.payload.dict['currency'];
     ticket = tickets[idx];
-    variables = getCache().get(str(event.userId) + '_variables');
-    data = ticket.getText();
+    data = ticket.getText() + '\r\nВалюта: ' + currency.upper();
     screen = Screen( data, session, keyBoard);
     return screen;
 
@@ -100,7 +101,7 @@ def selectCurrencyScreen(session: VkBotSession, keyBoard: VkBotKeyboard, event: 
 def searchTicketsFromDate(session: VkBotSession, keyBoard: VkBotKeyboard, event: BotEvent):
     userVars = UserVariables(event.userId);
     matches = re.findall('\d{4}\-\d{2}\-\d{2}', event.message);
-    screenText = 'Введите дату начала поездки (например 2019-02-01)';
+    screenText = 'Введите дату начала поездки (например 2019-07-01)';
     foundCommand = userVars.getCommand();
 
     if foundCommand is not None and len(foundCommand) > 0:
@@ -124,7 +125,7 @@ def searchTicketsFromDate(session: VkBotSession, keyBoard: VkBotKeyboard, event:
                 userVars.save();
                 return searchTicketsToDate(session, keyBoard, event);
             else:
-               screenText = 'Дата некорректная (должна быть больше чем сегодня)!';
+               screenText = 'Дата некорректная, должна быть больше чем сегодня например (2019-07-01)!';
     else:
         userVars.addCommand(Command.SearchTicketsFromDate);
         userVars.save();
@@ -134,7 +135,7 @@ def searchTicketsFromDate(session: VkBotSession, keyBoard: VkBotKeyboard, event:
 def searchTicketsToDate(session: VkBotSession, keyBoard: VkBotKeyboard, event: BotEvent):
     userVars = UserVariables(event.userId);
     matches = re.findall('\d{4}\-\d{2}\-\d{2}', event.message);
-    screenText = 'Введите дату окончания поездки (например 2019-02-01)';
+    screenText = 'Введите дату окончания поездки (например 2019-07-05)';
     foundCommand = userVars.getCommand();
 
     if foundCommand is not None and len(foundCommand) > 0:
@@ -163,7 +164,7 @@ def searchTicketsToDate(session: VkBotSession, keyBoard: VkBotKeyboard, event: B
                 else:
                     screenText = 'Дата должна быть больше чем дата начала поездки!';
             else:
-                 screenText = 'Дата некорректная (должна быть больше чем сегодня)!';
+                 screenText = 'Дата некорректная, должна быть больше чем сегодня например (2019-07-05)!';
     else:
         userVars.addCommand(Command.SearchTicketsToDate);
         userVars.save();
@@ -182,7 +183,15 @@ def searchTicketsFromCity(session: VkBotSession, keyBoard: VkBotKeyboard, event:
         else:
             screenText = 'Выберите найденный город из списка';
             firstCities = cities[:7];
-            for c in firstCities:
+
+            filteredCities = [];
+            foundNames = [];
+            for city in firstCities:
+                if city.name not in foundNames:
+                   foundNames.append(city.name);
+                   filteredCities.append(city);
+
+            for c in filteredCities:
                 dict = {};
                 dict['code'] = c.code;
                 dict['name'] = c.name;
@@ -216,7 +225,15 @@ def searchTicketsToCity(session: VkBotSession, keyBoard: VkBotKeyboard, event: B
         else:
             screenText = 'Выберите найденный город из списка';
             firstCities = cities[:7];
-            for c in firstCities:
+
+            filteredCities = [];
+            foundNames = [];
+            for city in firstCities:
+                if city.name not in foundNames:
+                   foundNames.append(city.name);
+                   filteredCities.append(city);
+
+            for c in filteredCities:
                 dict = {};
                 dict['code'] = c.code;
                 dict['name'] = c.name;

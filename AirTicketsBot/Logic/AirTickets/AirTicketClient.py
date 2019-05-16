@@ -52,7 +52,7 @@ class AirTicketClient:
                 if errors is not None:
                    data = jsonTickets.get('data').get('prices');
             except Exception as e:
-                data = jsonTickets.get('data').get('prices');
+                data = data;
 
             for ticket in data:
                 result['tickets'].append(AirTicket(ticket));
