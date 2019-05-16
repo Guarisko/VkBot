@@ -20,5 +20,7 @@ class Command:
 
       TicketInfo = 'TICKET_INFO'
 
+      PriceRange = 'PRICE_RANGE'
+
       BackMenu = 'BACK_MENU'
 

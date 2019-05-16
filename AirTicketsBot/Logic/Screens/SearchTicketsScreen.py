@@ -22,16 +22,25 @@ def searchTickets(session: VkBotSession, keyBoard: VkBotKeyboard, event: BotEven
     toDate = userVars.getVariable(Variables.TicketToDate);
     fromCity = userVars.getVariable(Variables.TicketFromCity);
     toCity = userVars.getVariable(Variables.TicketToCity);
+    priceRange = userVars.getVariable(Variables.PriceRange);
     currency = event.payload.dict['currency'];
     found = client.getTickets(fromDate, toDate, fromCity, toCity, currency);
 
     isSearch = event.payload.dict['isSearch'];
     if not isSearch:
-       UserSearchRequestRepository.create(currency, fromCity, toCity, fromDate, toDate, event.userId);
+       UserSearchRequestRepository.create(currency, fromCity, toCity, fromDate, toDate,priceRange, event.userId);
 
     error = found.get('error');
     tickets = found.get('tickets')[:8];
+
+    
     cheapest = sorted(tickets, key=lambda x: x.price, reverse=False);
+
+    if priceRange is not None:
+        prices = priceRange.split();
+        priceFrom = int(prices[0]);
+        priceTo = int(prices[1]);
+        cheapest = [item for item in cheapest if item.price >= priceFrom and item.price <= priceTo];
 
     userVars.addVariable('currency', currency);
 
@@ -253,4 +262,24 @@ def searchTicketsToCitySelect(session: VkBotSession, keyBoard: VkBotKeyboard, ev
     userVars.addVariable(Variables.TicketToCityName, name);
     userVars.addCommand('');
     userVars.save();
-    return selectCurrencyScreen(session, keyBoard, event);
+    return searchTicketsPriceRange(session, keyBoard, event);
+
+def searchTicketsPriceRange(session: VkBotSession, keyBoard: VkBotKeyboard, event: BotEvent):
+    userVars = UserVariables(event.userId);
+    matches = re.findall('(\d+)\s(\d+)', event.message);
+    screenText = 'Введите ценовой диапазон (10000 20000 только целые числа)';
+    foundCommand = userVars.getCommand();
+
+    if foundCommand is not None and len(foundCommand) > 0:
+        if len(matches) == 0:
+            screenText = 'Пожалуйста введите ценовой диапазон в следующем формате через пробел: 10000 20000';
+        else:
+            userVars.addVariable(Variables.PriceRange, event.message);
+            userVars.addCommand('');
+            userVars.save();
+            return selectCurrencyScreen(session, keyBoard, event);
+    else:
+        userVars.addCommand(Command.PriceRange);
+        userVars.save();
+    keyBoard.addButton(KeyBoardButton('Назад в меню', Payload(Command.BackMenu)));
+    return Screen( screenText, session, keyBoard);

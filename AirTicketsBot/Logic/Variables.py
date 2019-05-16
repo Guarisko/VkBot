@@ -10,4 +10,6 @@ class Variables:
       TicketToCity = 'ticketToCity'
       TicketToCityName = 'ticketToCityName'
 
+      PriceRange = 'priceRange'
+
       TicketCurrency = 'ticketCurrency'

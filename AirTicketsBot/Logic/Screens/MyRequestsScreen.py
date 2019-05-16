@@ -37,6 +37,7 @@ def userTicketRequestScreen(session: VkBotSession, keyBoard: VkBotKeyboard, even
     userVars.addVariable(Variables.TicketToDate, request.endDate);
     userVars.addVariable(Variables.TicketFromCity, request.fromCity);
     userVars.addVariable(Variables.TicketToCity, request.toCity);
+    userVars.addVariable(Variables.PriceRange, request.priceRange);
     userVars.save();
 
     dict = {};

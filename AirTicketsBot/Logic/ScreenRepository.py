@@ -1,7 +1,7 @@
 from Bot.VkBotKeyboard import VkBotKeyboard;
 from Logic.Variables import Variables;
 from Logic.Screens.MyRequestsScreen import myRequests, userTicketRequestScreen;
-from Logic.Screens.SearchTicketsScreen import searchTickets, selectCurrencyScreen, showTicketInfo, searchTicketsFromDate, searchTicketsToDate, searchTicketsFromDate, searchTicketsFromCity, searchTicketsToCity, searchTicketsFromCitySelect, searchTicketsToCitySelect;
+from Logic.Screens.SearchTicketsScreen import searchTickets, selectCurrencyScreen, showTicketInfo, searchTicketsFromDate, searchTicketsToDate, searchTicketsFromDate, searchTicketsFromCity, searchTicketsToCity, searchTicketsFromCitySelect, searchTicketsToCitySelect, searchTicketsPriceRange;
 from Logic.Command import Command
 from Logic.Screens.MainScreen import mainScreen, backMenu, botRules, supportScreen;
 from Bot.BotEvent import BotEvent;
@@ -64,6 +64,8 @@ class ScreenRepository:
 
         self.screens[Command.SearchTicketsFromCity] = searchTicketsFromCity;
         self.screens[Command.SearchTicketsFromCitySelect] = searchTicketsFromCitySelect;
+
+        self.screens[Command.PriceRange] = searchTicketsPriceRange;
         
         self.screens[Command.SearchTicketsToCity] = searchTicketsToCity;
         self.screens[Command.SearchTicketsToCitySelect] = searchTicketsToCitySelect;

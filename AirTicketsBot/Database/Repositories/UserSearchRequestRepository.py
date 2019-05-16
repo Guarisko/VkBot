@@ -39,11 +39,11 @@ class UserSearchRequestRepository:
         return result;
 
      @staticmethod
-     def create(currency, fromCity, toCity, startDate, endDate, userId):
+     def create(currency, fromCity, toCity, startDate, endDate, priceRange, userId):
         handle = DbHandle.get();
         try:
             user = UserRepository.getById(userId);
-            request = DbUserSearchRequest(currency=currency, fromCity=fromCity, user=user.id, toCity=toCity,startDate=startDate, endDate=endDate);
+            request = DbUserSearchRequest(currency=currency, priceRange=priceRange, fromCity=fromCity, user=user.id, toCity=toCity,startDate=startDate, endDate=endDate);
             request.save();
         except Exception as e:
             getLogger().fatal(e, exc_info=True);

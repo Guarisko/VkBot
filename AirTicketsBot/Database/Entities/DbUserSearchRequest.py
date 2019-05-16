@@ -12,6 +12,7 @@ class DbUserSearchRequest(BaseDbModel):
     startDate = CharField(max_length=100);
     endDate = CharField(max_length=100);
     createdMsk = DateTimeField(default=datetime.datetime.now);
+    priceRange = CharField(max_length=100, null=True);
     user = ForeignKeyField(DbUser, related_name='fk_user_search_request_user_id', to_field='id');
 
     class Meta:
