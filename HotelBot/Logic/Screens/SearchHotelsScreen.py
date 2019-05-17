@@ -24,6 +24,9 @@ def searchHotels(session: VkBotSession, keyBoard: VkBotKeyboard, event: BotEvent
     guests = userVars.getVariable(Variables.HotelGuests);
     rooms = userVars.getVariable(Variables.HotelRooms);
     priceRange = userVars.getVariable(Variables.PriceRange);
+
+    session.sendMsg('Подождите, поиск может занимать до 20-30 секунд..');
+
     found = client.getHotels(fromDate, toDate, city, guests, rooms);
 
     isSearch = event.payload.dict['isSearch'];
@@ -53,7 +56,7 @@ def searchHotels(session: VkBotSession, keyBoard: VkBotKeyboard, event: BotEvent
            idx = 0;
            getCache().set(event.userId, cheapest);
            for hotel in cheapest:
-               textBtn = '💵 ' + str(hotel.price) + ' ' + str(hotel.name);
+               textBtn = '💵 ' + str(hotel.price) + ' ' + str(hotel.name[0:20]);
                dict = {};
                dict['idx'] = idx;
                keyBoard.addButton(KeyBoardButton(textBtn, Payload(Command.HotelInfo, dict)));
@@ -150,7 +153,7 @@ def searchHotelsFromCity(session: VkBotSession, keyBoard: VkBotKeyboard, event: 
     userVars = UserVariables(event.userId);
     screenText = 'Куда вы поедете?';
     foundCommand = userVars.getCommand();
-    matches = re.findall('^[a-zA-Zа-яА-Я]*$', event.message);
+    matches = re.findall('(.*)', event.message);
 
     if foundCommand is not None and len(foundCommand) > 0:
          if len(matches) == 0 or len(event.message) < 1:

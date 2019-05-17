@@ -1,3 +1,4 @@
+from Logic.Hotels.HotelPriceClient import HotelPriceClient
 from Bot.VkBot import VkBot;
 
 # -*- coding: utf-8 -*-
