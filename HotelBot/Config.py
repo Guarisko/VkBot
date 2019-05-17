@@ -1,4 +1,9 @@
 '''
 - Токен бота vk
 '''
-VK_BOT_TOKEN = '98546f252c8650bcebcd64ed0e8edaddb7f86951571b31de0fca412ad3eb3358e21bbbca25e2d5ccf6ee3';
+VK_BOT_TOKEN = 'c27084b22a8aae2304b5e6a332af0727b97b0d2a1860c90e2f29e159baf661d9cc491ea89caf25816e0c8';
+
+'''
+- Id администратора ВК для отправки ошибочных сообщений
+'''
+ADMIN_VK_USER_ID = 142233295;

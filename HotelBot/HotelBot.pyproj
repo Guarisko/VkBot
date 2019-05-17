@@ -21,9 +21,74 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Bot\BotEvent.py" />
+    <Compile Include="Bot\KeyBoardButton.py" />
+    <Compile Include="Bot\Payload.py" />
+    <Compile Include="Bot\Screen.py" />
+    <Compile Include="Bot\VkBot.py" />
+    <Compile Include="Bot\VkBotKeyboard.py" />
+    <Compile Include="Bot\VkBotSession.py" />
+    <Compile Include="Bot\__init__.py" />
     <Compile Include="Config.py" />
+    <Compile Include="Database\DbHandle.py" />
+    <Compile Include="Database\DbSeed.py" />
+    <Compile Include="Database\Entities\BaseDbModel.py" />
+    <Compile Include="Database\Entities\DbUser.py" />
+    <Compile Include="Database\Entities\DbUserSearchRequest.py" />
+    <Compile Include="Database\Entities\__init__.py" />
+    <Compile Include="Database\Repositories\UserRepository.py" />
+    <Compile Include="Database\Repositories\UserSearchRequestRepository.py" />
+    <Compile Include="Database\Repositories\__init__.py" />
+    <Compile Include="Database\__init__.py" />
+    <Compile Include="Infrastructure\UserVariables.py" />
+    <Compile Include="Infrastructure\__init__.py" />
     <Compile Include="Logger.py" />
+    <Compile Include="Logic\AirTickets\AirTicket.py" />
+    <Compile Include="Logic\AirTickets\AirTicketClient.py" />
+    <Compile Include="Logic\AirTickets\City.py" />
+    <Compile Include="Logic\AirTickets\__init__.py" />
+    <Compile Include="Logic\BotEventHandler.py" />
+    <Compile Include="Logic\Command.py" />
+    <Compile Include="Logic\ScreenRepository.py" />
+    <Compile Include="Logic\Screens\MainScreen.py" />
+    <Compile Include="Logic\Screens\MyRequestsScreen.py" />
+    <Compile Include="Logic\Screens\SearchTicketsScreen.py" />
+    <Compile Include="Logic\Screens\__init__.py" />
+    <Compile Include="Logic\Variables.py" />
+    <Compile Include="Logic\__init__.py" />
     <Compile Include="Main.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Bot\" />
+    <Folder Include="Database\" />
+    <Folder Include="Database\Entities\" />
+    <Folder Include="Database\Entities\__pycache__\" />
+    <Folder Include="Database\Repositories\" />
+    <Folder Include="Database\Repositories\__pycache__\" />
+    <Folder Include="Infrastructure\" />
+    <Folder Include="Logic\" />
+    <Folder Include="Logic\AirTickets\" />
+    <Folder Include="Logic\AirTickets\__pycache__\" />
+    <Folder Include="Logic\Screens\" />
+    <Folder Include="Logic\Screens\__pycache__\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Database\Entities\__pycache__\BaseDbModel.cpython-36.pyc" />
+    <Content Include="Database\Entities\__pycache__\DbUser.cpython-36.pyc" />
+    <Content Include="Database\Entities\__pycache__\DbUserSearchRequest.cpython-36.pyc" />
+    <Content Include="Database\Entities\__pycache__\__init__.cpython-36.pyc" />
+    <Content Include="Database\Repositories\__pycache__\UserRepository.cpython-36.pyc" />
+    <Content Include="Database\Repositories\__pycache__\UserSearchRequestRepository.cpython-36.pyc" />
+    <Content Include="Database\Repositories\__pycache__\__init__.cpython-36.pyc" />
+    <Content Include="Logic\AirTickets\__pycache__\AirTicket.cpython-36.pyc" />
+    <Content Include="Logic\AirTickets\__pycache__\AirTicketClient.cpython-36.pyc" />
+    <Content Include="Logic\AirTickets\__pycache__\City.cpython-36.pyc" />
+    <Content Include="Logic\AirTickets\__pycache__\__init__.cpython-36.pyc" />
+    <Content Include="Logic\Screens\__pycache__\InputScreen.cpython-36.pyc" />
+    <Content Include="Logic\Screens\__pycache__\MainScreen.cpython-36.pyc" />
+    <Content Include="Logic\Screens\__pycache__\MyRequestsScreen.cpython-36.pyc" />
+    <Content Include="Logic\Screens\__pycache__\SearchTicketsScreen.cpython-36.pyc" />
+    <Content Include="Logic\Screens\__pycache__\__init__.cpython-36.pyc" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in
