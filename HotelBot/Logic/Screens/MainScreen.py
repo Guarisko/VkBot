@@ -11,7 +11,7 @@ def mainScreen(session: VkBotSession, keyBoard: VkBotKeyboard, event: BotEvent):
     userVars = UserVariables(event.userId);
     userVars.clear();
    
-    keyBoard.addButton(KeyBoardButton('Найти отель', Payload(Command.SearchTicketsFromDate)));
+    keyBoard.addButton(KeyBoardButton('Найти отель', Payload(Command.SearchHotelsFromDate)));
     keyBoard.addNewLine();
 
     keyBoard.addButton(KeyBoardButton('Мои запросы на поиск', Payload(Command.UserRequests)));

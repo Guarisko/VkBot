@@ -1,8 +1,8 @@
 from Bot.VkBotKeyboard import VkBotKeyboard;
 from Logic.Variables import Variables;
-from Logic.Screens.MyRequestsScreen import myRequests, userTicketRequestScreen;
-from Logic.Screens.SearchTicketsScreen import searchTickets, selectCurrencyScreen, showTicketInfo, searchTicketsFromDate, searchTicketsToDate, searchTicketsFromDate, searchTicketsFromCity, searchTicketsToCity, searchTicketsFromCitySelect, searchTicketsToCitySelect, searchTicketsPriceRange;
-from Logic.Command import Command
+from Logic.Screens.MyRequestsScreen import myRequests, userHotelsRequestScreen;
+from Logic.Screens.SearchHotelsScreen import searchHotels, showHotelInfo, searchHotelsFromDate, searchHotelsToDate, searchHotelsFromCity, searchHotelsGuests, searchHotelsPriceRange;
+from Logic.Command import Command;
 from Logic.Screens.MainScreen import mainScreen, backMenu, botRules, supportScreen, aviaBotScreen;
 from Bot.BotEvent import BotEvent;
 from Database.DbHandle import DbHandle
@@ -57,23 +57,18 @@ class ScreenRepository:
         self.screens[Command.BackMenu] = backMenu;
         self.screens[Command.Support] = supportScreen;
         self.screens[Command.BotRules] = botRules;
-        self.screens[Command.TicketInfo] = showTicketInfo;
         self.screens[Command.AviaBot] = aviaBotScreen;
 
-        self.screens[Command.SearchTicketsFromDate] = searchTicketsFromDate;
-        self.screens[Command.SearchTicketsToDate] = searchTicketsToDate;
 
-        self.screens[Command.SearchTicketsFromCity] = searchTicketsFromCity;
-        self.screens[Command.SearchTicketsFromCitySelect] = searchTicketsFromCitySelect;
+        self.screens[Command.PriceRange] = searchHotelsPriceRange;
+        self.screens[Command.SearchHotelsFromDate] = searchHotelsFromDate;
+        self.screens[Command.SearchHotelsToDate] = searchHotelsToDate;
+        self.screens[Command.SearchHotelsGuests] = searchHotelsGuests;
+        self.screens[Command.SearchHotelsRooms] = searchHotelsRooms;
 
-        self.screens[Command.PriceRange] = searchTicketsPriceRange;
-        
-        self.screens[Command.SearchTicketsToCity] = searchTicketsToCity;
-        self.screens[Command.SearchTicketsToCitySelect] = searchTicketsToCitySelect;
-        
-        self.screens[Command.SearchTicketsFromCurrency] = selectCurrencyScreen;
+        self.screens[Command.SearchHotels] = searchHotels;
+        self.screens[Command.HotelInfo] = showHotelInfo;
 
-        self.screens[Command.SearchTickets] = searchTickets;
         self.screens[Command.UserRequests] = myRequests;
-        self.screens[Command.UserTicketRequest] = userTicketRequestScreen;
+        self.screens[Command.UserHotelsRequest] = userHotelsRequestScreen;
         
