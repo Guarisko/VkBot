@@ -2,8 +2,7 @@ from Bot.VkBotSession import VkBotSession
 from Logic.Hotels.HotelPriceClient import HotelPriceClient
 from Database.Repositories.UserSearchRequestRepository import UserSearchRequestRepository
 from Cache import getCache;
-from Logic.Variables import Variables
-from Logic.AirTickets.AirTicketClient import AirTicketClient;
+from Logic.Variables import Variables;
 from Bot.Screen import Screen;
 from Logic.Command import Command
 from Bot.Payload import Payload
@@ -119,7 +118,7 @@ def searchHotelsToDate(session: VkBotSession, keyBoard: VkBotKeyboard, event: Bo
             screenText = 'Пожалуйста введите дату в следующем формате год-месяц-число';
         else:
 
-            fromDate = datetime.datetime.strptime(userVars.getVariable(Variables.HotelToDate), '%Y-%m-%d');
+            fromDate = datetime.datetime.strptime(userVars.getVariable(Variables.HotelFromDate), '%Y-%m-%d');
             now = datetime.datetime.now();
             isCorrectDate = True;
             date = None;
@@ -173,13 +172,13 @@ def searchHotelsGuests(session: VkBotSession, keyBoard: VkBotKeyboard, event: Bo
     foundCommand = userVars.getCommand();
 
     if foundCommand is not None and len(foundCommand) > 0:
-        if event.message not in ['1', '2','3','4','5','6','7','8','9','10']:
+        if event.message not in ['1','2','3','4','5','6','7','8','9','10']:
            screenText = 'Пожалуйста введите число от 1 до 10';
         else:
             userVars.addVariable(Variables.HotelGuests, event.message);
             userVars.addCommand('');
             userVars.save();
-            return searchHotelsGuests(session, keyBoard, event);
+            return searchHotelsRooms(session, keyBoard, event);
     else:
         userVars.addCommand(Command.SearchHotelsGuests);
         userVars.save();
@@ -218,6 +217,9 @@ def searchHotelsPriceRange(session: VkBotSession, keyBoard: VkBotKeyboard, event
             userVars.addVariable(Variables.PriceRange, event.message);
             userVars.addCommand('');
             userVars.save();
+            dict ={};
+            dict['isSearch'] = False;
+            event.payload = Payload('', dict);
             return searchHotels(session, keyBoard, event);
     else:
         userVars.addCommand(Command.PriceRange);

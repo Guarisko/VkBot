@@ -1,7 +1,5 @@
 from Cache import getCache;
 from Logger import getLogger;
-from Logic.AirTickets.AirTicket import AirTicket;
-from Logic.AirTickets.City import City;
 import requests;
 import json;
 

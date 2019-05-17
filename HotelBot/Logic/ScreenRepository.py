@@ -1,7 +1,7 @@
 from Bot.VkBotKeyboard import VkBotKeyboard;
 from Logic.Variables import Variables;
 from Logic.Screens.MyRequestsScreen import myRequests, userHotelsRequestScreen;
-from Logic.Screens.SearchHotelsScreen import searchHotels, showHotelInfo, searchHotelsFromDate, searchHotelsToDate, searchHotelsFromCity, searchHotelsGuests, searchHotelsPriceRange;
+from Logic.Screens.SearchHotelsScreen import searchHotels, showHotelInfo, searchHotelsFromDate, searchHotelsToDate, searchHotelsFromCity, searchHotelsGuests, searchHotelsPriceRange, searchHotelsRooms;
 from Logic.Command import Command;
 from Logic.Screens.MainScreen import mainScreen, backMenu, botRules, supportScreen, aviaBotScreen;
 from Bot.BotEvent import BotEvent;
@@ -63,6 +63,7 @@ class ScreenRepository:
         self.screens[Command.PriceRange] = searchHotelsPriceRange;
         self.screens[Command.SearchHotelsFromDate] = searchHotelsFromDate;
         self.screens[Command.SearchHotelsToDate] = searchHotelsToDate;
+        self.screens[Command.SearcHotelsCity] = searchHotelsFromCity;
         self.screens[Command.SearchHotelsGuests] = searchHotelsGuests;
         self.screens[Command.SearchHotelsRooms] = searchHotelsRooms;
 

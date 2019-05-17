@@ -29,6 +29,7 @@
     <Compile Include="Bot\VkBotKeyboard.py" />
     <Compile Include="Bot\VkBotSession.py" />
     <Compile Include="Bot\__init__.py" />
+    <Compile Include="Cache.py" />
     <Compile Include="Config.py" />
     <Compile Include="Database\DbHandle.py" />
     <Compile Include="Database\DbSeed.py" />

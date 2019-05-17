@@ -28,7 +28,7 @@ def mainScreen(session: VkBotSession, keyBoard: VkBotKeyboard, event: BotEvent):
 
 def supportScreen(session: VkBotSession, keyBoard: VkBotKeyboard, event: BotEvent):
     keyBoard.addButton(KeyBoardButton('Назад в меню', Payload(Command.BackMenu)));
-    screen = Screen('Для технической поддержки напишите администратору группы. Перейдите по ссылке: https://vk.me/club182332169', session, keyBoard);
+    screen = Screen('Для технической поддержки напишите администратору группы. Перейдите по ссылке: https://vk.com/club182332169', session, keyBoard);
     return screen;
 
 def aviaBotScreen(session: VkBotSession, keyBoard: VkBotKeyboard, event: BotEvent):

@@ -1,5 +1,5 @@
+from Logic.Screens.SearchHotelsScreen import searchHotels;
 from Bot.VkBotSession import VkBotSession;
-from Logic.Screens.SearchTicketsScreen import searchHotels
 from Logic.Variables import Variables;
 from Database.Repositories.UserSearchRequestRepository import UserSearchRequestRepository;
 from Bot.Screen import Screen;
