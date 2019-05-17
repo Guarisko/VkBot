@@ -19,6 +19,7 @@ class Command:
       SearchTicketsToCitySelect = 'SEARCH_TICKETS_TO_CITY_SELECT'
 
       TicketInfo = 'TICKET_INFO'
+      HotelsBot = 'HOTELS_BOT'
 
       PriceRange = 'PRICE_RANGE'
 

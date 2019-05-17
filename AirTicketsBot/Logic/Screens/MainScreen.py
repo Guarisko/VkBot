@@ -19,6 +19,8 @@ def mainScreen(session: VkBotSession, keyBoard: VkBotKeyboard, event: BotEvent):
 
     keyBoard.addButton(KeyBoardButton('Поддержка', Payload(Command.Support)));
     keyBoard.addButton(KeyBoardButton('Как пользоваться ботом', Payload(Command.BotRules)));
+    keyBoard.addNewLine();
+    keyBoard.addButton(KeyBoardButton('Бот для поиска отелей', Payload(Command.HotelsBot)));
 
     user = session.getUser();
     screen = Screen( user.name + ', вас приветствует бот по поиску ДЕШЕВЫХ авиабилетов.\r\nВыберите подходящий пункт меню ниже.', session, keyBoard);
@@ -27,6 +29,11 @@ def mainScreen(session: VkBotSession, keyBoard: VkBotKeyboard, event: BotEvent):
 def supportScreen(session: VkBotSession, keyBoard: VkBotKeyboard, event: BotEvent):
     keyBoard.addButton(KeyBoardButton('Назад в меню', Payload(Command.BackMenu)));
     screen = Screen('Для технической поддержки напишите администратору группы. Перейдите по ссылке: https://vk.com/club153941379', session, keyBoard);
+    return screen;
+
+def hotelsBot(session: VkBotSession, keyBoard: VkBotKeyboard, event: BotEvent):
+    keyBoard.addButton(KeyBoardButton('Назад в меню', Payload(Command.BackMenu)));
+    screen = Screen('Чтобы найти дешевые отели перейдите в бота по ссылке: https://vk.me/club182332169', session, keyBoard);
     return screen;
 
 def botRules(session: VkBotSession, keyBoard: VkBotKeyboard, event: BotEvent):
