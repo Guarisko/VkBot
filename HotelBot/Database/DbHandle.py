@@ -1,13 +1,13 @@
-from peewee import *;
+﻿from peewee import *;
  
 user = 'postgres';
-password = '1';
+password = '12345678';
 db_name = 'hotels';
  
 dbhandle = PostgresqlDatabase(
     db_name, user=user,
     password=password,
-    host='localhost'
+    host='185.185.69.252'
 );
 
 #работа с соединением в базе данных
