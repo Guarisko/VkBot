@@ -36,7 +36,7 @@ class HotelPriceClient:
         options = Options()
         #options.add_argument("--headless");
         #options.add_argument('--no-sandbox');
-        driver = webdriver.Chrome(chrome_options=options, executable_path='/usr/local/bin/chromedriver');
+        driver = webdriver.Chrome(chrome_options=options, executable_path='./chromedriver');
         driver.get('https://www.skyscanner.ru/hotels');
 
         delay = 45;
