@@ -1,4 +1,4 @@
-from Logic.Hotels.HotelPrice import HotelPrice
+﻿from Logic.Hotels.HotelPrice import HotelPrice
 from Cache import getCache;
 from Logger import getLogger;
 import requests;
@@ -36,7 +36,7 @@ class HotelPriceClient:
         options = Options()
         #options.add_argument("--headless");
         #options.add_argument('--no-sandbox');
-        driver = webdriver.Chrome(chrome_options=options, executable_path=r'chromedriver.exe');
+        driver = webdriver.Chrome(chrome_options=options, executable_path='/usr/local/bin/chromedriver');
         driver.get('https://www.skyscanner.ru/hotels');
 
         delay = 45;
